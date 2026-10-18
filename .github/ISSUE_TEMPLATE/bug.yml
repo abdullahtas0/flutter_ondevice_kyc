@@ -1,0 +1,45 @@
+name: Bug
+description: A scan, validation, or build failure. No document photos or full numbers.
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include a real MRZ, PAN, TCKN, or a photo of an identity document.
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      description: The version from pubspec.yaml, or the git commit.
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: target
+    attributes:
+      label: Target
+      description: Device model and OS, or desktop/web.
+      placeholder: Huawei ELS-NX9, Android 10
+    validations:
+      required: true
+  - type: dropdown
+    id: decision
+    attributes:
+      label: What the scanner did
+      options:
+        - locked
+        - rejected, no card
+        - rejected, bad quad
+        - rejected, checksum
+        - rejected, unreadable
+        - process crashed
+        - did not get that far
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps
+      description: What you ran, and the log line if you have one. Redact document text.
+    validations:
+      required: true

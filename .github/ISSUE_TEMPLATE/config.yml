@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Read the contribution rules first
+    url: https://github.com/abdullahtas0/flutter_ondevice_kyc/blob/main/CONTRIBUTING.md
+    about: Pull requests need an issue a maintainer has labeled accepted.

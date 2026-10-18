@@ -1,7 +1,12 @@
 name: flutter_ondevice_kyc
 description: "On-device KYC scanning for MRZ and card numbers. The scan path makes no network call."
 version: 0.1.0
-publish_to: "none"
+repository: https://github.com/abdullahtas0/flutter_ondevice_kyc
+issue_tracker: https://github.com/abdullahtas0/flutter_ondevice_kyc/issues
+topics:
+  - ocr
+  - camera
+  - identity
 
 environment:
   sdk: ^3.13.2
