@@ -42,9 +42,41 @@ flowchart TD
 
 Runtime is `flutter_onnxruntime` 1.9. The default provider is CPU. XNNPACK and CoreML are opt-in through `KycExecutionProvider`. NNAPI is not a default: it is slow on these small graphs and it is deprecated on Android 15.
 
+## Integrate
+
+The host app owns the model files. Copy `example/assets/models/` into the host assets and list the three files in the host `pubspec.yaml`. Digests are in [assets/models/README.md](assets/models/README.md).
+
+```yaml
+dependencies:
+  flutter_ondevice_kyc: ^1.0.0
+
+flutter:
+  assets:
+    - assets/models/card_detector.onnx
+    - assets/models/text_rec.onnx
+    - assets/models/en_dict.txt
+```
+
+```dart
+final scanner = await KycScanner.onnx(
+  detectorAsset: 'assets/models/card_detector.onnx',
+  recognizerAsset: 'assets/models/text_rec.onnx',
+  dictionaryAsset: 'assets/models/en_dict.txt',
+);
+
+KycScanView(
+  scanner: scanner,
+  onLocked: (capture) {},
+);
+```
+
+`KycScanView` opens the back camera, draws the card guide and the three MRZ marks, and locks focus on that band. `onLocked` runs when a checksum matches.
+
+Android: the plugin manifest adds `CAMERA`, and `consumer-proguard.pro` keeps `ai.onnxruntime.**` so a minified release build does not rename the ONNX Runtime classes. iOS: add `NSCameraUsageDescription` to the host `Info.plist`, and set the deployment target to 16.0. The plugin cannot write that string for you.
+
 ## Run
 
-Flutter 3.24 or newer. The example ships its models in `example/assets/models/`.
+Flutter 3.24 or newer. The example is a host app: its models live in `example/assets/models/`.
 
 ```bash
 flutter pub get
@@ -55,14 +87,16 @@ flutter test
 flutter run
 ```
 
-The scan tab opens the back camera, focuses the three marks at the bottom of the guide, and locks focus. Tap the image to focus again. The validation tab locks pasted text. That lock did not come from a document.
-
-Android release builds use R8. `example/android/app/proguard-rules.pro` keeps the ONNX Runtime classes. Without that keep rule, `OrtSession.run` aborts the process in a minified build.
+The scan tab embeds `KycScanView`. Tap the image to focus again. The validation tab locks pasted text. That lock did not come from a document.
 
 ## API
 
 ```dart
-final scanner = await KycScanner.onnx();
+final scanner = await KycScanner.onnx(
+  detectorAsset: 'assets/models/card_detector.onnx',
+  recognizerAsset: 'assets/models/text_rec.onnx',
+  dictionaryAsset: 'assets/models/en_dict.txt',
+);
 final decision = await scanner.scanStill(image);
 if (decision is ScanLocked) {
   final capture = decision.capture;

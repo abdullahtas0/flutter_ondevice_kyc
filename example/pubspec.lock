@@ -34,7 +34,7 @@ packages:
     source: hosted
     version: "2.1.2"
   camera:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: camera
       sha256: "4142a19a38e388d3bab444227636610ba88982e36dff4552d5191a86f65dc437"
@@ -188,7 +188,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.1.0"
+    version: "1.0.0"
   flutter_onnxruntime:
     dependency: transitive
     description:

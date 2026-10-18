@@ -68,11 +68,9 @@ class ScanObservation {
 
 String rejectLabel(RejectReason reason) {
   return switch (reason) {
-    RejectReason.checksum =>
-      'MRZ okundu, hane tutmadı. Kartı düz ve sabit tut.',
-    RejectReason.badQuad => 'Köşeler çerçevede değil. Kartı düz tut.',
-    RejectReason.noCard => 'Kimlik çerçevede görünmüyor.',
-    RejectReason.unreadable =>
-      'Alt üç satır net değil. Çerçeveyi doldurup sabit tut.',
+    RejectReason.checksum => 'The digits did not match. Hold the card steady.',
+    RejectReason.badQuad => 'The card corners are outside the guide.',
+    RejectReason.noCard => 'No card is inside the guide.',
+    RejectReason.unreadable => 'The bottom lines are not sharp enough.',
   };
 }

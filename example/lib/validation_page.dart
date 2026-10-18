@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ondevice_kyc/flutter_ondevice_kyc.dart';
 
+import 'demo_copy.dart';
 import 'result_panel.dart';
 
 class ValidationPage extends StatefulWidget {
@@ -85,7 +86,7 @@ class _ValidationPageState extends State<ValidationPage> {
             title: result.locked ? 'Kilit' : 'Kilit yok',
             detail: result.locked
                 ? 'Checksum tuttu.'
-                : rejectLabel(result.reason ?? RejectReason.unreadable),
+                : demoRejectLabel(result.reason ?? RejectReason.unreadable),
             rows: result.capture == null
                 ? const []
                 : captureRows(result.capture!),

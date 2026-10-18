@@ -34,9 +34,11 @@ class KycScanner {
   }) : _gate = frameGate ?? FrameGate(),
        _clock = clock ?? DateTime.now;
 
-  static const defaultDetectorAsset = 'assets/models/card_detector.onnx';
-  static const defaultRecognizerAsset = 'assets/models/text_rec.onnx';
-  static const defaultDictionaryAsset = 'assets/models/en_dict.txt';
+  /// Conventional asset keys. The host app lists these files in its own
+  /// `pubspec.yaml`. This package does not ship the weights.
+  static const suggestedDetectorAsset = 'assets/models/card_detector.onnx';
+  static const suggestedRecognizerAsset = 'assets/models/text_rec.onnx';
+  static const suggestedDictionaryAsset = 'assets/models/en_dict.txt';
 
   final bool fixture;
   final void Function(ScanObservation observation)? onTrace;
@@ -64,7 +66,7 @@ class KycScanner {
   /// Loads the card detector only. Text is not invented, so a frame cannot lock
   /// until a recognizer is supplied.
   static Future<KycScanner> detectorOnly({
-    String detectorAsset = defaultDetectorAsset,
+    required String detectorAsset,
     List<KycExecutionProvider> providers = const [KycExecutionProvider.cpu],
     void Function(ScanObservation observation)? onTrace,
   }) async {
@@ -80,9 +82,9 @@ class KycScanner {
   }
 
   static Future<KycScanner> onnx({
-    String detectorAsset = defaultDetectorAsset,
-    String recognizerAsset = defaultRecognizerAsset,
-    String dictionaryAsset = defaultDictionaryAsset,
+    required String detectorAsset,
+    required String recognizerAsset,
+    required String dictionaryAsset,
     List<KycExecutionProvider> providers = const [KycExecutionProvider.cpu],
     void Function(ScanObservation observation)? onTrace,
   }) async {

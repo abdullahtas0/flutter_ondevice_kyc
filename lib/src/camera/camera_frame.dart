@@ -1,10 +1,11 @@
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
-import 'package:flutter_ondevice_kyc/flutter_ondevice_kyc.dart';
 
-import 'viewfinder.dart';
+import '../pipeline/frame_convert.dart';
+import '../scan/guide.dart';
 
+/// Copies a camera buffer into a [RawCameraFrame] the scanner can rotate and crop.
 RawCameraFrame? rawFromCameraImage(
   CameraImage image, {
   required int sensorOrientation,

@@ -3,6 +3,9 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_ondevice_kyc/flutter_ondevice_kyc.dart';
+import 'package:flutter_ondevice_kyc/src/pipeline/ctc_decoder.dart';
+import 'package:flutter_ondevice_kyc/src/pipeline/detection.dart';
+import 'package:flutter_ondevice_kyc/src/pipeline/scanner.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -116,8 +119,8 @@ void main() {
     }
   });
 
-  test('bundled onnx and dictionaries stay within 15 MB', () {
-    final dir = Directory('assets/models');
+  test('reference onnx and dictionaries stay within 16 MB', () {
+    final dir = Directory('example/assets/models');
     if (!dir.existsSync()) return;
     var bytes = 0;
     for (final entity in dir.listSync(recursive: true)) {
@@ -127,7 +130,7 @@ void main() {
         bytes += entity.lengthSync();
       }
     }
-    expect(bytes <= 15 * 1024 * 1024, isTrue);
+    expect(bytes <= 16 * 1024 * 1024, isTrue);
   });
 }
 

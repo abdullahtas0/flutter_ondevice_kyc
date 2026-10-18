@@ -29,6 +29,9 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 /build/
 /coverage/
+android/.gradle/
+android/build/
+android/local.properties
 
 # Training checkpoints and Colab scratch stay out of git.
 # The example inference files under example/assets/models/ are tracked.

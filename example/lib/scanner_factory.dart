@@ -19,9 +19,9 @@ Future<OpenedScanner> openScanner() async {
     debugPrint('kyc ${observation.elapsedMs}ms ${observation.status}');
   }
 
-  final detector = await _assetReady(KycScanner.defaultDetectorAsset);
-  final recognizer = await _assetReady(KycScanner.defaultRecognizerAsset);
-  final dictionary = await _assetReady(KycScanner.defaultDictionaryAsset);
+  final detector = await _assetReady(KycScanner.suggestedDetectorAsset);
+  final recognizer = await _assetReady(KycScanner.suggestedRecognizerAsset);
+  final dictionary = await _assetReady(KycScanner.suggestedDictionaryAsset);
   if (!detector) {
     return OpenedScanner(
       scanner: KycScanner.fixture(onTrace: trace),
@@ -31,14 +31,22 @@ Future<OpenedScanner> openScanner() async {
   }
   try {
     if (recognizer && dictionary) {
-      final scanner = await KycScanner.onnx(onTrace: trace);
+      final scanner = await KycScanner.onnx(
+        detectorAsset: KycScanner.suggestedDetectorAsset,
+        recognizerAsset: KycScanner.suggestedRecognizerAsset,
+        dictionaryAsset: KycScanner.suggestedDictionaryAsset,
+        onTrace: trace,
+      );
       return OpenedScanner(
         scanner: scanner,
         fixture: false,
         label: 'Cihaz modeli',
       );
     }
-    final scanner = await KycScanner.detectorOnly(onTrace: trace);
+    final scanner = await KycScanner.detectorOnly(
+      detectorAsset: KycScanner.suggestedDetectorAsset,
+      onTrace: trace,
+    );
     return OpenedScanner(
       scanner: scanner,
       fixture: false,

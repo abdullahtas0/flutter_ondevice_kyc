@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ondevice_kyc/src/scan/guide.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kyc_example/viewfinder.dart';
 
 void main() {
   test('portrait sensor turn and the guide crop stay on the card', () {

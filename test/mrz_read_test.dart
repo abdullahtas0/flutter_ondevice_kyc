@@ -77,12 +77,7 @@ String _td1() {
   final birthCheck = icaoCheckDigit(birth);
   final expiryCheck = icaoCheckDigit(expiry);
   final compositeSource =
-      line1.substring(5) +
-      birth +
-      '$birthCheck' +
-      expiry +
-      '$expiryCheck' +
-      optional2;
+      '${line1.substring(5)}$birth$birthCheck$expiry$expiryCheck$optional2';
   final line2 =
       '$birth$birthCheck'
       'M'

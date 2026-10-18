@@ -1,4 +1,5 @@
 import 'package:flutter_ondevice_kyc/flutter_ondevice_kyc.dart';
+import 'package:flutter_ondevice_kyc/src/pipeline/scanner.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

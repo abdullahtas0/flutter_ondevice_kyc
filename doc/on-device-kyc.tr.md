@@ -1,6 +1,6 @@
 # Kimlik karesini sunucuya koymadan MRZ okumak
 
-KYC, bankanın müşteriyi tanıma işinin adıdır. Bu paket o işin tamamını yapmaz. Kameradaki kareden makine okunur bölgeyi ya da kart numarasını çıkarır. ICAO 9303 veya Luhn tutarsa sonucu verir. Tutmazsa kareyi reddeder. Canlılık, NFC çip, yüz karşılaştırması ve CVV yoktur. Yeşil kilit, okunan karakterlerin check digit'inin tuttuğunu söyler.
+KYC, bankanın müşteriyi tanıma işinin adıdır. Bu paket o işin tamamını yapmaz. Kameradaki kareden makine okunur bölgeyi ya da kart numarasını çıkarır. ICAO 9303 veya Luhn tutarsa sonucu verir. Tutmazsa kareyi reddeder. Canlılık, NFC çip, yüz karşılaştırması ve CVV yoktur. Yeşil kilit, kişinin onaylandığı anlamına gelmez. Okunan karakterlerin check digit'inin tuttuğu anlamına gelir.
 
 ## Check digit modelden önce kondu
 

@@ -20,7 +20,7 @@ void main() {
 
     await tester.enterText(
       find.byKey(const Key('mrz-field')),
-      brokenErikssonMrz(),
+      _brokenEriksson(),
     );
     await tester.tap(find.byKey(const Key('check-button')));
     await tester.pumpAndSettle();
@@ -55,4 +55,10 @@ void main() {
     }
     expect(tester.takeException(), isNull);
   });
+}
+
+String _brokenEriksson() {
+  final text = IcaoSamples.erikssonTd3;
+  final last = text[text.length - 1];
+  return '${text.substring(0, text.length - 1)}${last == '0' ? '1' : '0'}';
 }
