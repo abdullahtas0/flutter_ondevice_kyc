@@ -1,0 +1,3 @@
+pending  card_detector.onnx
+pending  text_rec.onnx
+pending  en_dict.txt
