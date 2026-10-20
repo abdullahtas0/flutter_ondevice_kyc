@@ -8,6 +8,16 @@ The code is [MIT](LICENSE). The detector is YOLOX-Nano and the recognizer is the
 
 Turkish process notes: [doc/on-device-kyc.tr.md](doc/on-device-kyc.tr.md).
 
+## Example
+
+These frames are the example app on an Android emulator. The locked fields are the ICAO 9303 specimen, not a real document. The scan tab draws the card guide; the emulator camera has no scene behind it.
+
+| Paste | Lock | Scan |
+| --- | --- | --- |
+| ![Validation tab](doc/images/validation.png) | ![Checksum lock](doc/images/lock.png) | ![Scan guide](doc/images/scan.png) |
+
+![Example recording](doc/images/demo.gif)
+
 ## What it reads
 
 | Document | Shape | Gate |
@@ -19,7 +29,7 @@ Turkish process notes: [doc/on-device-kyc.tr.md](doc/on-device-kyc.tr.md).
 
 Names come out in MRZ Latin. Turkish dotted letters are not in those lines.
 
-The detector was fine-tuned on synthetic rectangles. A real card is still read when the MRZ lines sit in the frame. This repository does not contain photographs of real identity documents.
+The detector was fine-tuned on synthetic cards. A real card is still read when the MRZ lines sit in the frame. This repository does not contain photographs of real identity documents.
 
 ## Pipeline
 
@@ -48,7 +58,7 @@ The host app owns the model files. Copy `example/assets/models/` into the host a
 
 ```yaml
 dependencies:
-  flutter_ondevice_kyc: ^1.0.0
+  flutter_ondevice_kyc: ^1.1.0
 
 flutter:
   assets:
@@ -89,6 +99,10 @@ flutter run
 
 The scan tab embeds `KycScanView`. Tap the image to focus again. The validation tab locks pasted text. That lock did not come from a document.
 
+## Measure
+
+Lock rate, false-lock rate, and p95 are defined in [eval/README.md](eval/README.md). Frames and the manifest stay outside git. The fixture test checks the arithmetic. A model measurement points `KYC_EVAL_DIR` at a private folder.
+
 ## API
 
 ```dart
@@ -116,7 +130,7 @@ Weights live in `example/assets/models/`. Digests are in [assets/models/README.m
 | `text_rec.onnx` | `en_PP-OCRv4_mobile_rec`, opset 11, FP32 | 7.3 MB |
 | `en_dict.txt` | PaddleOCR English dictionary, including `<` | 190 B |
 
-Training scripts are in `training/`. Checkpoints and generated images stay out of git. Detector INT8 is only worth doing with a calibration set that keeps detection quality. The recognizer stayed FP32.
+Training scripts are in `training/`. The Colab notebook is [training/colab_yolox.ipynb](training/colab_yolox.ipynb). It draws a held-out synthetic set and fine-tunes YOLOX-Nano. The checked-in detector is that fine-tune. Checkpoints and generated images stay out of git. Detector INT8 is only worth doing with a calibration set that keeps detection quality. The recognizer stayed FP32.
 
 ## Privacy
 

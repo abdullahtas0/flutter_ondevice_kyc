@@ -1,3 +1,8 @@
+## 1.1.0
+
+- The example detector weight is the synthetic-card fine-tune. The checksum gate is unchanged. The host still copies the three model files into its own assets.
+- A private measurement ledger scores lock rate, false locks, and p95. It is not part of the host API.
+
 ## 1.0.0
 
 - `KycScanView` is the scan surface a host app embeds. It opens the back camera, keeps the preview aspect, draws the card guide and MRZ lane, and locks focus on that lane.

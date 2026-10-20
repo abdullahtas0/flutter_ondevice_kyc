@@ -22,3 +22,7 @@ jobs:
         working-directory: example
       - run: flutter test
         working-directory: example
+      - run: python3 -m pip install pillow
+      - run: python3 training/finetune_yolox_nano.py --self-test
+      - run: python3 training/export_models.py --self-test
+      - run: python3 -m py_compile training/export_yolox_onnx.py training/yolox_nano_kyc.py

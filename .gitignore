@@ -44,8 +44,13 @@ android/local.properties
 *.pdopt
 training/out/
 training/datasets/
+YOLOX_outputs/
 training/__pycache__/
 __pycache__/
 colab_training/
 colab_training.zip
+
+# Private measurement frames, manifests, and written ledgers.
+eval/private/
+ledger.txt
 

@@ -24,9 +24,11 @@ PYTHONPATH=/content/YOLOX python tools/train.py \
 
 Ön eğitim ağırlığı YOLOX 0.1.1rc0 sürümündeki `yolox_nano.pth`. Nano derinlik 0.33, genişlik 0.25, 50 epoch, giriş 416. GPU o oturumda Tesla T4 idi.
 
+Tekrarlanabilir koşu `training/colab_yolox.ipynb` dosyasıdır. Çekirdek Colab, hızlandırıcı GPU olur. Betik kimlik fotoğrafı indirmez. Örnekteki `card_detector.onnx` bu ince ayardır.
+
 Dışa aktarma da Colab'da yapıldı. PyTorch 2.6 ve sonrası `torch.load` varsayılan olarak `weights_only=True` kullanır. Eski checkpoint bu ayarla açılmaz. `torch.onnx._export` da kalkmıştı. Çalışan çağrı `torch.onnx.export(..., dynamo=False)` ve `--no-onnxsim` oldu. Çıkan dosya `card_detector.onnx`, yaklaşık 8.6 MB.
 
-Doğrulama kümesi de aynı sentetik dikdörtgenlerdi. O skor, fotoğraflanmış kimlikte kutu çıkacağını ölçmez. Telefonda asıl okuma, çerçevenin altındaki satırların tanınmasıdır. Detector kutusu işe yararsa homografi onu kullanır. Yaramazsa ve karede kontrast varsa çerçevenin kendisi dörtgen olur.
+Doğrulama kümesi de aynı sentetik kartlardı. O skor, fotoğraflanmış kimlikte kutu çıkacağını ölçmez. Telefonda asıl okuma, çerçevenin altındaki satırların tanınmasıdır. Detector kutusu işe yararsa homografi onu kullanır. Yaramazsa ve karede kontrast varsa çerçevenin kendisi dörtgen olur.
 
 ## Tanıyıcı Colab'da bitmedi
 
@@ -51,6 +53,8 @@ Odak ayrı bozuldu. Sürekli otomatik netlik MRZ'yi oynatıyordu. Kamera açıl�
 ## Kilit sahteciliği ölçmez
 
 Kilit, karakterlerin check digit'ini ölçer. Kartın sahte olduğunu, çipin eşleştiğini veya kişinin kadrajda canlı durduğunu ölçmez. Detector gerçek kimlik fotoğrafıyla eğitilmedi. Tanıyıcı, `L898902C3<` gibi basılı bir örnek dizgede denendi. Fotoğraflanmış bir MRZ ile birim test edilmedi. İki karakter birden kayarsa tamir aday seçemez ve kare reddedilir. O kare haneyi tutmamıştır.
+
+Fotoğraflanmış karelerin ölçümü [eval/README.md](../eval/README.md) defterindedir. Kare ve manifest repoya girmez. Defter kilit oranını, yanlış kilidi ve p95 süreyi yazar. Fikstür testi hesabı doğrular. Model ölçümü, özel klasör ONNX ile koşulunca başlar.
 
 ## Kaynaklar
 
