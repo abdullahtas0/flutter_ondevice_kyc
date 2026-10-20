@@ -49,6 +49,7 @@ training/__pycache__/
 __pycache__/
 colab_training/
 colab_training.zip
+projem.ipynb
 
 # Private measurement frames, manifests, and written ledgers.
 eval/private/
